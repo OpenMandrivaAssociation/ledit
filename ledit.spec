@@ -14,7 +14,6 @@ Patch1:		%{name}-1.11.camlp4.patch.bz2
 BuildRequires:	ocaml
 BuildRequires:	camlp4
 BuildRequires:	ncurses-devel
-BuildRoot: 	%{_tmppath}/%{name}-%{version}
 
 %description 
 Ledit is a line editor, allowing to use control commands like in emacs
