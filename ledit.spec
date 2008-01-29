@@ -1,6 +1,6 @@
 %define name	ledit
-%define version	1.11
-%define release	%mkrel 3
+%define version	2.00
+%define release	%mkrel 1
 
 Name: 		%{name}
 Version: 	%{version}
@@ -8,11 +8,9 @@ Release: 	%{release}
 License: 	BSD like
 Summary:	Line editor
 Group:		Editors
-Source:		http://caml.inria.fr/distrib/bazar-ocaml/%{name}.tar.bz2
-Patch0:		%{name}-1.11.makefile.patch.bz2
-Patch1:		%{name}-1.11.camlp4.patch.bz2
+Source:		http://pauillac.inria.fr/~ddr/ledit/distrib/src/%{name}-%{version}.tgz
 BuildRequires:	ocaml
-BuildRequires:	camlp4
+BuildRequires:	camlp5
 BuildRequires:	ncurses-devel
 BuildRoot: 	%{_tmppath}/%{name}-%{version}
 
@@ -23,9 +21,7 @@ written in Ocaml and Camlp4 and uses the library unix.cma.
 
 %prep
 %setup -q
-%patch0
-%patch1
-mv ledit.l.tpl ledit.1.tpl
+perl -pi -e 's|\+camlp5|+site-lib/camlp5|' Makefile
 
 %build
 make
@@ -34,7 +30,7 @@ make
 rm -rf %{buildroot}
 make \
 	BINDIR=%{buildroot}%{_bindir} \
-	MANDIR=%{buildroot}%{_mandir} \
+	MANDIR=%{buildroot}%{_mandir}/man1 \
 	install
 
 %clean
@@ -42,6 +38,6 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc Changes LICENSE README
+%doc CHANGES LICENSE README
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
