@@ -1,5 +1,5 @@
 %define name	ledit
-%define version	2.02
+%define version	2.02.1
 %define release	%mkrel 1
 
 Name: 		%{name}
